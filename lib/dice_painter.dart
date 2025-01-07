@@ -19,19 +19,19 @@ class DicePainter extends CustomPainter {
 
     // Calculate the dots for the previous face and the current face
     List<Rect> previousDots = dots
+        .whereIndexed((idx, _) => _getDots(previous).contains(idx))
         .map((dot) => Rect.fromCenter(
             center: dot.center.scale(previousCompression, 1.0),
             width: dot.width * previousCompression,
             height: dot.height))
-        .whereIndexed((idx, _) => _getDots(previous).contains(idx))
         .toList();
     List<Rect> currentDots = dots
+        .whereIndexed((idx, _) => _getDots(current).contains(idx))
         .map((dot) => Rect.fromCenter(
             center:
                 dot.center.scale(animationProgress, 1.0) + Offset(border, 0),
             width: dot.width * animationProgress,
             height: dot.height))
-        .whereIndexed((idx, _) => _getDots(current).contains(idx))
         .toList();
 
     // Draw the backgrounds
@@ -70,7 +70,7 @@ class DicePainter extends CustomPainter {
       case 3:
         return Colors.orange.shade300;
       case 4:
-        return Colors.yellow.shade400;
+        return Colors.yellow.shade600;
       case 5:
         return Colors.purple.shade300;
       case 6:

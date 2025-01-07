@@ -2,7 +2,9 @@ part of 'main_page_screen.dart';
 
 abstract class _MainPageController extends State<MainPage> {
   final _random = Random();
-  final player = AudioPlayer();
+  final player = AudioPlayer()
+    ..audioCache = AudioCache()
+    ..setSource(AssetSource("dice_roll.mp3"));
 
   bool _rollInProgress = false;
   double _animationProgress = 1.0;
@@ -39,8 +41,7 @@ abstract class _MainPageController extends State<MainPage> {
 
   // Play the sound of the rolling dice
   void _playSound() async {
-    player.audioCache = AudioCache();
-    await player.play(AssetSource("dice_roll.mp3"));    
+    await player.play(AssetSource("dice_roll.mp3"));
   }
 
   // Play the animation of the rolling die
